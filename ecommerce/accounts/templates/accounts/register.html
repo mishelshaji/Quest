@@ -1,0 +1,19 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <form method="post">
+            <h1 class="text-center">Register</h1>
+            {{ form.as_p }}
+            <div class="d-grid">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.querySelectorAll('input').forEach(function(e) {
+            e.classList.add('form-control');
+        });
+    </script>
+{% endblock content %}

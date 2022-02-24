@@ -1,0 +1,60 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Brand</h1>
+    <div class="my-5">
+        <form method="post">
+            <div class="d-grid">
+                <label>{{ form.name.label }}</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.name.errors %}
+                            {{ e }} <br/>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.slug.label }}</label>
+                {{ form.slug }}
+                {% if form.slug.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.slug.errors %}
+                            {{ e }} <br/>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.description.label }}</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.description.errors %}
+                            {{ e }} <br/>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <label>{{ form.website.label }}</label>
+                {{ form.website }}
+                {% if form.website.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for e in form.website.errors %}
+                            {{ e }} <br/>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-grid mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+    

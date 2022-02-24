@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">MyStore</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="visually-hidden">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Category</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="{% url 'category_create' %}">New Ctaegory</a>
+                            <a class="dropdown-item" href="{% url 'category_list' %}">Category List</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Brand</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="{% url 'brand_create' %}">New Brand</a>
+                            <a class="dropdown-item" href="{% url 'brand_list' %}">Brand List</a>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% if user.is_staff %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Product</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="{% url 'product_create' %}">New Product</a>
+                            <a class="dropdown-item" href="{% url 'product_list' %}">Product List</a>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endif %}
+                    
+                <li>
+                    <form class="d-flex my-2 my-lg-0">
+                        <input class="form-control me-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+            
+            {% if user.is_authenticated %}
+                <span class="me-4">
+                    Welcome 
+                    <b class="text-success">{{ user.get_full_name }}</b>!
+                </span>
+                <a href="{% url 'logout' %}" class="btn btn-success" onclick="return confirm('Are you sure you want to log out?');">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+            {% endif %}
+                
+        </div>
+    </div>
+</nav>

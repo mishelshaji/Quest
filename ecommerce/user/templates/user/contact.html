@@ -1,0 +1,52 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+    <title>Contact Us</title>
+{% endblock meta %}
+    
+
+{% block content %}
+    <h1 class="text-center">Contact Us</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <form method="post">
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    <div class="d-grid mt-2">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Send Message</button>
+                    </div>
+
+
+
+
+
+
+
+
+                    {% comment %}
+                    <div class="form-group">
+                        {{ form.name.label }}
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label }}
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.message.label }}
+                        {{ form.message }}
+                    </div>
+                    <div class="d-grid mt-2">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Send Message</button>
+                    </div>
+                    {% endcomment %}
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

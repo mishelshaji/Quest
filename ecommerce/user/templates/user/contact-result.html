@@ -1,0 +1,16 @@
+{% extends 'shared/base.html' %}
+
+{% block meta %}
+    <title>Home</title>
+{% endblock meta %}  
+
+{% block content %}
+    <h1 class="text-center">
+        Thanks for your message! 
+        
+        {% autoescape off %}
+            {{ full_name }}
+        {% endautoescape %}
+        
+    </h1>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Brand</h1>
+    <div class="my-5">
+        <form method="post">
+            <p>Do you want to delete <b>{{ object.name }}</b></p>
+            <div class="d-grid mt-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
