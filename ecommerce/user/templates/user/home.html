@@ -23,7 +23,7 @@
                                 <span class="ms-2 text-primary">{{ product.category.name }}</span>
                             </p>
                             <div class="d-flex">
-                                <a href="" class="btn btn-primary ms-auto">
+                                <a href="{% url 'customer:cart_add' id=product.id %}" class="btn btn-primary ms-auto">
                                     <ion-icon name="cart"></ion-icon>
                                     Add to Cart
                                 </a>

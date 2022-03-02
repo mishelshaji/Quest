@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user',
     'administrator',
     'accounts',
+    'customer',
     'debug_toolbar',
 ]
 
@@ -83,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'djangoapp',
-        'USER': 'mishel',
+        'USER': 'root',
         'PASSWORD': 'Pass@123',
         'HOST': '127.0.0.1',
         'PORT': '3306',

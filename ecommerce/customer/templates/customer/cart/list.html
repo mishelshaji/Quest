@@ -1,0 +1,32 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1 class="text-center">Cart</h1>
+    <div class="container my-2">
+        <table class="table table-striped">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for i in object_list %}
+            <tr>
+                <td>{{ i.product.name }}</td>
+                <td>{{ i.product.price }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{% url 'customer:cart_remove' id=i.id %}" class="btn btn-danger">-</a>
+                        <button class="btn btn-primary">{{ i.quantity }}</button>
+                        <a href="{% url 'customer:cart_add' id=i.product.id %}" class="btn btn-success">+</a>
+                    </div>
+                </td>
+                <td>
+                    <a href="{% url 'customer:cart_delete' id=i.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}
+    
