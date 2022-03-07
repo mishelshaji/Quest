@@ -1,11 +1,15 @@
+from this import d
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http.response import HttpResponseNotFound
+from django.http.response import HttpResponseNotFound, HttpResponse
 from .forms import *
 from .models import *
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 
 # Create your views here.
 
@@ -159,3 +163,22 @@ def product_delete(request, id):
     product.status = 'Inactive'
     product.save()
     return redirect('product_list')
+
+
+class UserListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = User
+    template_name = 'administrator/user/list.html'
+    paginate_by = 10
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+def user_list_ajax(request):
+    return render(request, 'administrator/user/list_js.html')
+
+
+def api_users(request):
+    users = User.objects.values('id', 'first_name', 'last_name', 'email', 'date_joined')
+    # data = json.dumps(list(users), cls=DjangoJSONEncoder)
+    # return HttpResponse(data, content_type='application/json')
+    return JsonResponse(list(users), safe=False)

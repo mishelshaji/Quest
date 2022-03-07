@@ -25,3 +25,18 @@ def contact(request):
         else:
             context['form'] = form
             return render(request, "user/contact.html", context)
+
+def seed_user(request):
+    from faker import Faker
+    from faker.providers import internet
+    fake = Faker()
+    users = []
+    for i in range(100):
+        user = User()
+        user.first_name = fake.name().split(' ')[0]
+        user.last_name = fake.name().split(' ')[1]
+        user.email = fake.ascii_free_email()
+        user.set_password(fake.password())
+        users.append(user)
+    User.objects.bulk_create(users)
+    return HttpResponse("Seeded 100 users.")

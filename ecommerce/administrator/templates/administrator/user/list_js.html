@@ -1,0 +1,48 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Users</h1>
+        <div class="d-flex">
+            <button type="button" class="btn btn-primary" onclick="loadData();">Get Data</button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Join Date</th>
+                </tr>
+            </thead>
+            <tbody id="target">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadData() { 
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    var target = document.getElementById('target');
+                    var content = "";
+                    data.forEach(function(obj){
+                        content += `
+                        <tr>
+                            <td>${obj.first_name}</td>
+                            <td>${obj.last_name}</td>
+                            <td>${obj.email}</td>
+                            <td>${obj.date_joined}</td>
+                        </tr>`;
+                    });
+                    target.innerHTML = content;
+                }
+            }
+            http.open("GET", "/administrator/api/users/", true);
+            http.send();
+        }
+    </script>
+{% endblock content %}

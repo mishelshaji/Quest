@@ -16,4 +16,8 @@ urlpatterns = [
     path('product/create/', product_create, name='product_create'),
     path('product/update/<id>/', product_update, name='product_update'),
     path('product/delete/<id>/', product_delete, name='product_delete'),
+
+    path('users/', UserListView.as_view(), name='user_list'),
+    path('users/js/', user_list_ajax, name='user_list_ajax'),
+    path('api/users/', api_users, name='api_users'),
 ]
